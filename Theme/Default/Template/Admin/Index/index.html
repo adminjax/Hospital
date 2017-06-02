@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>系统登录</title>
+	<link rel="stylesheet" type="text/css" href="{$Think.config.SKIN}Admin/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="{$Think.config.SKIN}Admin/css/admin.css">
+	<script type="text/javascript" src="{$Think.config.LIB}jquery.3.1.js"></script>
+</head>
+<body>
+	<div id="index">
+		<div class="container">
+			<div class="box">
+				<form class="login-form" action="{:U('Login/logInto')}" method="post">
+					<ul>
+						<li class="msg"></li>
+						<li class="header">后台管理系统登录</li>
+						<li class="username"><input type="text" name="username" value="" placeholder="用户名"></li>
+						<li class="password"><input type="password" name="password" value="" placeholder="密码"></li>
+						<li class="verify">
+							<input type="text" name="verify" value="" placeholder="验证码">
+							<img id="verify_img" alt="点击更换" title="点击更换" src="{:U('Index/getVerify')}" />
+							<script type="text/javascript">
+								/* 验证码刷新 */
+								jQuery("#verify_img").click(function(){
+									var verifyURL = "{$Think.config.ADMIN_URL}Index/getVerify";
+									var time = new Date().getTime();
+									jQuery("#verify_img").attr({
+										"src" : verifyURL+"/"+time
+									});
+								});
+
+								/*表单验证*/
+								//Validate.login(".login-post");
+							</script>
+						</li>
+						<li class="tools clear">
+							<div class="rememberme">
+								<input type="checkbox" name="remember" value=""><span>记住登录</span>
+							</div>
+							<div class="forget">
+								<a href="">忘记密码</a>
+							</div>
+						</li>
+						<li class="login"><button><span>登录</span></button></li>
+					</ul>
+				</form>
+				<div class="site-info">
+					<p>互联网工具SaaS平台 — 信息展示/营销模块/客户转化/客户管理/数据统计分析 — 云官网-云商城一路担当
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
