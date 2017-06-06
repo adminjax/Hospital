@@ -11,14 +11,6 @@ namespace Admin\Controller;
 use Think\Controller;
 
 class CommonController extends Controller {
-	
-    /**
-     * [index 后台入口]
-     * @return [type] [description]
-     */
-    public function index(){
-        $this->display();
-    }
 
     /**
      * [getMenu 获取目录]

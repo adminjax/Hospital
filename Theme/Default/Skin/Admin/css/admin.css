@@ -148,20 +148,90 @@
 	line-height: 30px;
 }
 
+.min-title{
+	font-size: 15px;
+	font-weight: 600;
+	background: #6f8992;
+	line-height: 30px;
+	color: #fff;
+	padding-left: 10px;
+	border: 1px solid #d6d6d6;
+}
+
 /**
- * 
+ * 内容宽度
  */
-.container .middle .content{
-	border: 1px solid;
+.container .middle{
 	padding: 0px 30px;
 }
 /**
- * 
+ * footer宽度 
  */
 .footer .footer-box{
-	border: 1px solid;
 	padding: 0px 30px;
 }
+
+
+/*页面结构*******************************************************/
+
+/**
+ * 左右结构
+ */
+.left-right{
+	margin: 20px 0px;
+	overflow: hidden;
+}
+.left-right .left{
+	float: left;
+	width: 210px;
+}
+.left-right .left ul li{
+	padding: 5px 0px 5px 20px;
+	border-bottom: 1px dashed #a9a9a9;
+	background: url("../images/side_col_bg.gif") repeat-y 207px 0 #D8E6E6;
+	font-size: 15px;
+	cursor: pointer;
+}
+.left-right .left ul .title{
+	padding-left: 0px;
+	font-size: 18px;
+	font-weight: 600;
+	border-bottom: 1px solid #a9a9a9;
+	padding: 0px 0px 10px 0px;
+	background:  url("../images/side_col_bg.gif") repeat-y 207px 0 #fff;
+	border-right: 1px solid #a9a9a9;
+	cursor: initial;
+}
+.left-right .right{
+	margin-left: 210px;
+	padding-left: 30px;
+}
+.left-right .right>ul>li{
+	display: none;
+}
+.left-right .right .active{
+	display: block;
+}
+.left-right .top{
+	padding: 0px 0px 0px 0px !important;
+	margin-bottom: 30px;
+}
+.left-right .left ul .active{
+	background: #fff;
+	border-bottom: 1px solid #a9a9a9;
+	border-right: inherit;
+	cursor: initial;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -216,4 +286,33 @@
 }
 #index .login{
 	margin: 30px 0px;
+}
+
+
+/**
+ * add Employee
+ */
+#addemployee .employee .content ul{
+	border: 1px solid #d6d6d6;
+	padding-left: 30px;
+	font-size: 15px;
+	color: #000;
+}
+#addemployee .employee .content ul li{
+	/*line-height: 50px;*/
+}
+#addemployee .employee .content ul label{
+	width:200px;
+	display: inline-block;
+}
+#addemployee .employee .content ul input,
+#addemployee .employee .content ul select{
+	border: 1px solid ;
+	width: 200px;
+	height: 25px;
+	display: inline-block;
+	margin-left: 10px;
+}
+#addemployee .employee .content ul input{
+	margin-left: 14px;
 }

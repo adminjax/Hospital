@@ -29,17 +29,17 @@ return array(
 		),
 		'3' => array(
 			'acl' => '3',
-			'label' => '员工信息',
+			'label' => '医生信息',
 			'name' => 'employee',
 			'sort' => 2,
 			'active' => 1,
 			'low' => array(
 				'3_1' => array(
 					'acl' => '3_1',
-					'label' => '增加员工',
-					'name' => 'EmployeeAdd',
+					'label' => '医生列表',
+					'name' => 'EmployeeList',
 					'sort' => 1,
-					'path' => 'Employee/Add',
+					'path' => 'Employee/list',
 					'active' => 1,
 				),
 				'3_2' => array(
