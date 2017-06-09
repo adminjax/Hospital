@@ -445,3 +445,18 @@ a.button{
 #tag .container .middle .top{
 	padding: 20px 0px 0px 0px;
 }
+
+
+/**
+ * order list
+ */
+#order .container .middle .top{
+	padding: 20px 0px 0px 0px;
+}
+
+/**
+ * Medical list
+ */
+#medical .container .middle .top{
+	padding: 20px 0px 0px 0px;
+}

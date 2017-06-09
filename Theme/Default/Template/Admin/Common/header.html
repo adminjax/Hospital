@@ -12,27 +12,33 @@
 <div class="nav-bar">
     <ul class="clear">
         <?php foreach ($menu as $key => $value) :?>
-            <li class="level0 <?php echo $value['code']; ?>">
-                <a href="{$Think.config.ADMIN_URL}<?php echo $value['path']; ?>"><span><?php echo $value['label']; ?></span></a>
-                <?php if(!empty($value['low'])): ?>
-                    <ul>
-                        <?php foreach($value['low'] as $ke => $val): ?>
-                            <li class="level1 <?php $val['code']; ?>">
-                                <a href="{$Think.config.ADMIN_URL}<?php echo $val['path']; ?>"><span><?php echo $val['label']; ?></span></a>
-                                <?php if(!empty($val['low'])): ?>
-                                    <ul>
-                                        <?php foreach($val['low'] as $k => $v): ?>
-                                            <li class="level2 <?php echo $v['code']; ?>">
-                                                <a href="{$Think.config.ADMIN_URL}<?php echo $v['path']; ?>"><span><?php echo $v['label']; ?></span></a>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
+            <?php if($value['active'] != 0): ?>
+                <li class="level0 <?php echo $value['code']; ?>">
+                    <a href="{$Think.config.ADMIN_URL}<?php echo $value['path']; ?>"><span><?php echo $value['label']; ?></span></a>
+                    <?php if(!empty($value['low'])): ?>
+                        <ul>
+                            <?php foreach($value['low'] as $ke => $val): ?>
+                                <?php if($val['active'] != 0): ?>
+                                    <li class="level1 <?php $val['code']; ?>">
+                                        <a href="{$Think.config.ADMIN_URL}<?php echo $val['path']; ?>"><span><?php echo $val['label']; ?></span></a>
+                                        <?php if(!empty($val['low'])): ?>
+                                            <ul>
+                                                <?php foreach($val['low'] as $k => $v): ?>
+                                                    <?php if($v['active'] != 0): ?>
+                                                        <li class="level2 <?php echo $v['code']; ?>">
+                                                            <a href="{$Think.config.ADMIN_URL}<?php echo $v['path']; ?>"><span><?php echo $v['label']; ?></span></a>
+                                                        </li>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        <?php endif; ?>
+                                    </li>
                                 <?php endif; ?>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                <?php endif; ?>
-            </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                </li>
+            <?php endif; ?>
         <?php endforeach; ?>
     </ul>
 </div>

@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>标签列表</title>
+	<title>病历信息</title>
 
 	<include file="Common/head" />
 
 </head>
 <body>
-	<div id="tag">
+	<div id="medical">
 		<div class="container">
 			<div class="box">
 				<div class="header">
@@ -16,9 +16,9 @@
 				</div>
 				<div class="middle">
 					<div class="top">
-						<div class="title"><span>标签列表</span><a class="button" href="{$Think.config.ADMIN_URL}Employee/add">添加标签</a></div>
+						<div class="title"><span>病历列表</span><a class="button" href="{$Think.config.ADMIN_URL}Medical/add">新增病历</a></div>
 					</div>
-					<div class="tag_list">
+					<div class="medical_list">
 						<div class="tools clear">
 							<div class="page">
 								sds
@@ -29,13 +29,16 @@
 							</div>
 						</div>
 						<div class="data-table">
-							<table cellspacing="0" class="data" id="tag-data">
+							<table cellspacing="0" class="data" id="medical-data">
 	                			<colgroup>
 					                <col width="160">
 					                <col>
 					                <col width="160">
+					                <col width="160">
 					                <col width="100">
+					                <col width="70">
 					                <col width="100">
+					                <col width="50">
 	                            </colgroup>
         						<thead>
                 					<tr class="headings">
@@ -46,12 +49,27 @@
                                         </th>
                                         <th>
                                         	<a href="#" name="name" title="asc" class="not-sort">
-                                        		<span class="name">标签名</span>
+                                        		<span class="name">病人名</span>
                                         	</a>
                                         </th>
                                         <th>
                                         	<a href="#" name="type" title="asc" class="not-sort">
-                                        		<span class="type">创建时间</span>
+                                        		<span class="type">开始时间</span>
+                                        	</a>
+                                        </th>
+                                        <th>
+                                        	<a href="#" name="type" title="asc" class="not-sort">
+                                        		<span class="type">结束时间</span>
+                                        	</a>
+                                        </th>
+                                        <th>
+                                        	<a href="#" name="docter" title="asc" class="not-sort">
+                                        		<span class="docter">主治医生</span>
+                                        	</a>
+                                        </th>
+                                        <th>
+                                        	<a href="#" name="docter" title="asc" class="not-sort">
+                                        		<span class="docter">是否完结</span>
                                         	</a>
                                         </th>
                                         <th>
@@ -80,10 +98,27 @@
 										<th>
                                         	<div class="entity_id">
                                             	<div class="range-line"><span class="label">From:</span> <input type="text" name="entity_id[from]" id="entity_id_from" value="" class="input-text no-changes"></div>
+                                        	</div>
+                                        </th>
+                                        <th>
+                                        	<div class="entity_id">
                                             	<div class="range-line"><span class="label">To:</span><input type="text" name="entity_id[to]" id="entity_id_to" value="" class="input-text no-changes"></div>
                                         	</div>
                                         </th>
-
+                                        <th>
+                                        	<div class="name">
+                                        		<input type="text" name="tag" id="tag" value="" class="input-text no-changes">
+                                        	</div>
+                                        </th>
+                                        <th>
+                                        	<div class="name">
+                                        		<select>
+                                        			<option></option>
+                                        			<option></option>
+                                        			<option></option>
+                                        		</select>
+                                        	</div>
+                                        </th>
                                         <th>
                                         	<div class="info">
                                         		<a href="#">删除</a>
