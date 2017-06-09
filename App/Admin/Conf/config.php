@@ -39,7 +39,7 @@ return array(
 					'label' => '医生列表',
 					'name' => 'EmployeeList',
 					'sort' => 1,
-					'path' => 'Employee/list',
+					'path' => 'Employee/listData',
 					'active' => 1,
 				),
 				'3_2' => array(
@@ -78,9 +78,17 @@ return array(
 			'low' => array(
 				'5_1' => array(
 					'acl' => '5_1',
+					'label' => '添加标签',
+					'name' => 'tag',
+					'sort' => 1,
+					'path' => 'Tag/listData',
+					'active' => 1,
+				),
+				'5_2' => array(
+					'acl' => '5_2',
 					'label' => '病历列表',
 					'name' => 'medical',
-					'sort' => 1,
+					'sort' => 2,
 					'path' => 'Medical/List',
 					'active' => 1,
 				),

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>标签列表</title>
+
+	<include file="Common/head" />
+
+</head>
+<body>
+	<div id="tag">
+		<div class="container">
+			<div class="box">
+				<div class="header">
+					<include file="Common/header"/>					
+				</div>
+				<div class="middle">
+					<div class="top">
+						<div class="title"><span>标签列表</span></div>
+					</div>
+					<div class="tag_list">
+						<div class="tools clear">
+							<div class="page">
+								sds
+							</div>
+							<div class="button">
+								<button class="reset"><span>重置条件</span></button>
+								<button class="search"><span>搜索</span></button>
+							</div>
+						</div>
+						<div class="data-table">
+							<table cellspacing="0" class="data" id="tag-data">
+	                			<colgroup>
+					                <col width="160">
+					                <col>
+					                <col width="160">
+					                <col width="100">
+					                <col width="100">
+	                            </colgroup>
+        						<thead>
+                					<tr class="headings">
+                                        <th>
+                                        	<a href="#" name="entity_id" title="降序" class="sort-arrow-desc">
+                                        		<span class="entity_id">ID</span>
+                                        	</a>
+                                        </th>
+                                        <th>
+                                        	<a href="#" name="name" title="asc" class="not-sort">
+                                        		<span class="name">标签名</span>
+                                        	</a>
+                                        </th>
+                                        <th>
+                                        	<a href="#" name="type" title="asc" class="not-sort">
+                                        		<span class="type">创建时间</span>
+                                        	</a>
+                                        </th>
+                                        <th>
+                                        	<a href="#" name="docter" title="asc" class="not-sort">
+                                        		<span class="docter">操作</span>
+                                        	</a>
+                                        </th>
+                                        <th>
+                                        	<a href="#" name="info" title="asc" class="not-sort">
+                                        		<span class="info">详情</span>
+                                        	</a>
+                                        </th>
+                                    </tr>
+                                    <tr class="filter">
+                                        <th>
+                                        	<div class="entity_id">
+                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="entity_id[from]" id="entity_id_from" value="" class="input-text no-changes"></div>
+                                            	<div class="range-line"><span class="label">To:</span><input type="text" name="entity_id[to]" id="entity_id_to" value="" class="input-text no-changes"></div>
+                                        	</div>
+                                        </th>
+                                        <th>
+                                        	<div class="name">
+                                        		<input type="text" name="tag" id="tag" value="" class="input-text no-changes">
+                                        	</div>
+                                        </th>
+										<th>
+                                        	<div class="entity_id">
+                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="entity_id[from]" id="entity_id_from" value="" class="input-text no-changes"></div>
+                                            	<div class="range-line"><span class="label">To:</span><input type="text" name="entity_id[to]" id="entity_id_to" value="" class="input-text no-changes"></div>
+                                        	</div>
+                                        </th>
+
+                                        <th>
+                                        	<div class="info">
+                                        		<a href="#">删除</a>
+                                        		<a href="#">修改</a>
+                                        	</div>
+                                        </th>
+                                        <th>
+                                        	<div class="info">
+                                        		<a href="#">详情</a>
+                                        	</div>
+                                        </th>
+                                    </tr>
+            					</thead>
+					        	<tbody>
+					                <tr class="even">
+					               		<td class="empty-text a-center" colspan="8">No records found.</td>
+					            	</tr>
+					            </tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="footer">
+					<include file="Common/footer"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

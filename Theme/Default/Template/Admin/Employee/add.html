@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>添加医生</title>
+
+	
+	<link href="{$Think.config.LIB}schedule/css/main.css"" rel="stylesheet" type="text/css" />
+	<link href="{$Think.config.LIB}schedule/css/dailog.css" rel="stylesheet" type="text/css" />
+	<link href="{$Think.config.LIB}schedule/css/calendar.css" rel="stylesheet" type="text/css" /> 
+	<link href="{$Think.config.LIB}schedule/css/dp.css" rel="stylesheet" type="text/css" />   
+	<link href="{$Think.config.LIB}schedule/css/alert.css" rel="stylesheet" type="text/css" />     
+	<link href="{$Think.config.LIB}schedule/css/blackbird.css" rel="stylesheet" type="text/css" />
+	<include file="Common/head" />
+
+</head>
+<body>
+	<div id="addemployee">
+		<div class="container">
+			<div class="box">
+				<div class="header">
+					<include file="Common/header"/>					
+				</div>
+				<div class="middle">
+					
+					<div class="employee clear left-right">
+						<div class="left">
+							<ul>
+								<li class="title"><span>医生信息</span></li>
+								<li id="base" class="active switch"><span>基础信息</span></li>
+								<li id="scheduling" class="switch"><span>排班</span></li>
+								<li id="historical" class="switch"><span>历史病人</span></li>
+							</ul>
+						</div>
+						<div class="right">
+							<ul>
+								<li id="base" class="active">
+									<div class="base-box">
+										<div class="top">
+											<div class="title"><span>添加医生</span></div>
+										</div>
+										<div class="content">
+											<div class="min-title"><span>基础信息</span></div>
+											<ul>
+												<li>
+													<label>头像</label>
+													<div class="upload">
+														<div class="formControls col-2">
+															<img id="avater" src="{$Think.config.SKIN}Admin/images/avater.jpg" />
+															<input type="hidden" class="avaterurl" value="" id="avaterurl"  name="avater"/>
+															<a href="javascript:void(0)" class="upAvater button avater" id="upAvater"><span>选择图片</span></a>
+														</div>
+														<script type="text/javascript">
+														    //图片上传
+														    jQuery(function() {
+																var uploader = new plupload.Uploader({
+																	//创建实例的构造方法
+																	runtimes: 'html5,flash,silverlight,html4', //上传插件初始化选用那种方式的优先级顺序
+																	browse_button: 'upAvater', // 上传按钮
+																	url: "{:U('Subject/uploadImage')}", //远程上传地址
+																	filters: {
+																		max_file_size: '10mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+																		mime_types: [//允许文件上传类型
+																			{title: "files", extensions: "jpg,png,gif,mp4"}
+																		]
+																	},
+																	init: {
+																		FilesAdded: function(up, files) { //文件上传前
+																			uploader.start();
+																		},
+																		FileUploaded: function(up, file, info) { //文件上传成功的时候触发
+																			var data = JSON.parse(info.response);
+																			jQuery('#avaterurl').attr('value', data.pic);
+																			jQuery('#avater').attr('src', data.pic);
+																		}
+																	}
+																});
+																uploader.init();
+														    });
+
+														    switchs.init('.switch');
+												    	</script> 
+													</div>
+												</li>
+												<li>
+													<label>姓名</label><input type="text" name="name" />
+												</li>
+												<li>
+													<label>性别</label>
+													<select class="gander">
+														<option>请选择</option>
+														<option value="0">女</option>
+														<option value="1">男</option>
+													</select>
+												</li>
+												<li>
+													<label>手机号</label><input type="text" name="phone" />
+												</li>
+												<li>
+													<label>个人简介</label>
+													<div class="jss">
+														<!-- 加载编辑器的容器 -->
+													    <script id="js" name="content" type="text/plain"></script>
+														<!-- 实例化编辑器 -->
+													    <script type="text/javascript">
+													        var ue = UE.getEditor('js');
+													    </script>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</li>
+								<li id="scheduling" class="">
+									<div class="scheduling-box">
+										<div class="top">
+											<div class="title"><span>医生排班</span></div>
+										</div>
+										<div class="content">
+											<div class="min-title"><span>设置排班</span></div>
+											<div id="calhead" style="padding-left:1px;padding-right:1px;">          
+									            <div class="cHead"><div class="ftitle">我的日程</div>
+									            <div id="loadingpannel" class="ptogtitle loadicon" style="display: none;">正在加载数据...</div>
+									             <div id="errorpannel" class="ptogtitle loaderror" style="display: none;">非常抱歉，无法加载您的活动，请稍后再试</div>
+									            </div>          
+									            
+									            <div id="caltoolbar" class="ctoolbar">
+									              	<!--
+									              	<div id="faddbtn" class="fbutton">
+									                	<div><span title='点击新建日程' class="addcal">
+									                	新建日程            
+									                	</span></div>
+									            	</div>
+									            	-->
+									            <div class="btnseparator"></div>
+									             <div id="showtodaybtn" class="fbutton">
+									                <div><span title='点击返回当前日程 ' class="showtoday">
+									                今天</span></div>
+									            </div>
+									              <div class="btnseparator"></div>
+									            <div id="showdaybtn" class="fbutton">
+									                <div><span title='日' class="showdayview">日</span></div>
+									            </div>
+									              <div  id="showweekbtn" class="fbutton fcurrent">
+									                <div><span title='周' class="showweekview">周</span></div>
+									            </div>
+									              <div  id="showmonthbtn" class="fbutton">
+									                <div><span title='月' class="showmonthview">月</span></div>
+									            </div>
+									            <div class="btnseparator"></div>
+									              <div  id="showreflashbtn" class="fbutton">
+									                <div><span title='刷新' class="showdayflash">刷新</span></div>
+									                </div>
+									             <div class="btnseparator"></div>
+									            <div id="sfprevbtn" title="上一个"  class="fbutton">
+									              <span class="fprev"></span>
+									            </div>
+									            <div id="sfnextbtn" title="下一个" class="fbutton">
+									                <span class="fnext"></span>
+									            </div>
+									            <div class="fshowdatep fbutton">
+									                    <div>
+									                        <input type="hidden" name="txtshow" id="hdtxtshow" />
+									                        <span id="txtdatetimeshow">Loading</span>
+									                    </div>
+									            </div>
+									            <div class="btnseparator"></div>
+									            <!--
+									            <div id="changetochinese" class="fbutton">
+									                <div><span title='中文' class="chinese">中文</span></div>
+									            </div>
+									            <div id="changetoenglish" class="fbutton">
+									                <div><span title='英文' class="english">英文</span></div>
+									            </div>
+									             <div id="changetoenglishau" class="fbutton">
+									                <div><span title='英文' class="english_au">英文</span></div>
+									            </div>
+									            <div class="btnseparator"></div>   
+									             -->      
+									            <div class="clear"></div>
+									            </div>
+									      	</div>
+									      	<div style="padding:1px;">
+										        <div class="t1 chromeColor">
+										            &nbsp;</div>
+										        <div class="t2 chromeColor">
+										            &nbsp;</div>
+										        <div id="dvCalMain" class="calmain printborder">
+										            <div id="gridcontainer" style="overflow-y: visible;">
+										            </div>
+										        </div>
+										        <div class="t2 chromeColor">
+										            &nbsp;</div>
+										        <div class="t1 chromeColor">
+										            &nbsp;
+										        </div>   
+									        </div>
+										</div>
+										<script src="{$Think.config.LIB}schedule/js/jquery.min.js" type="text/javascript"></script>  
+									    <script src="{$Think.config.LIB}schedule/js/Common.js" type="text/javascript"></script>    
+									    <script src="{$Think.config.LIB}schedule/js/blackbird.js" type="text/javascript"></script> 
+									    <script src="{$Think.config.LIB}schedule/js/datepicker_lang_zh_CN.js" type="text/javascript"></script>     
+									    <script src="{$Think.config.LIB}schedule/js/jquery.datepicker.js" type="text/javascript"></script>
+									    <script src="{$Think.config.LIB}schedule/js/jquery.alert.js" type="text/javascript"></script>    
+									    <script src="{$Think.config.LIB}schedule/js/jquery.ifrmdailog.js" defer="defer" type="text/javascript"></script>
+									    <script src="{$Think.config.LIB}schedule/js/xgcalendar_lang_zh_CN.js" type="text/javascript"></script>  
+									    <script src="{$Think.config.LIB}schedule/js/xgcalendar.js?v=1.2.0.4" type="text/javascript"></script>
+									    <script src="{$Think.config.LIB}schedule/js/index.js" type="text/javascript"></script>
+
+									</div>
+								</li>
+								<li id="historical" class="">
+									<div class="historical-box">
+										<div class="top">
+											<div class="title"><span>历史病人</span></div>
+										</div>
+										<div class="content">
+											<div class="tools clear">
+												<div class="page">
+													sdfs
+												</div>
+												<div class="button">
+													<button class="reset"><span>重置条件</span></button>
+													<button class="search"><span>搜索</span></button>
+												</div>
+											</div>
+											<div class="data-table">
+												<table cellspacing="0" class="data" id="historical-data">
+						                			<colgroup>
+										                <col width="100">
+										                <col>
+										                <col width="100">
+										                <col width="100">
+										                <col width="80">
+										                <col width="100">
+										                <col width="80">
+										                <col width="35">
+						                            </colgroup>
+                            						<thead>
+                                    					<tr class="headings">
+				                                            <th>
+				                                            	<a href="#" name="entity_id" title="降序" class="sort-arrow-desc">
+				                                            		<span class="entity_id">ID</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="name" title="asc" class="not-sort">
+				                                            		<span class="name">名字</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="type" title="asc" class="not-sort">
+				                                            		<span class="type">类型</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="docter" title="asc" class="not-sort">
+				                                            		<span class="docter">主治医师</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+					                                            <a href="#" name="start" title="asc" class="not-sort">
+					                                            	<span class="start">开始时间</span>
+					                                            </a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="end" title="asc" class="not-sort">
+				                                            		<span class="end">结束时间</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="complete" title="asc" class="not-sort">
+				                                            		<span class="complete">是否结束</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="info" title="asc" class="not-sort">
+				                                            		<span class="info">详情</span>
+				                                            	</a>
+				                                            </th>
+				                                        </tr>
+	                                                    <tr class="filter">
+				                                            <th>
+				                                            	<div class="entity_id">
+					                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="entity_id[from]" id="entity_id_from" value="" class="input-text no-changes"></div>
+					                                            	<div class="range-line"><span class="label">To:</span><input type="text" name="entity_id[to]" id="entity_id_to" value="" class="input-text no-changes"></div>
+				                                            	</div>
+				                                            </th>
+				                                            <th>
+				                                            	<div class="name">
+				                                            		<input type="text" name="name" id="name" value="" class="input-text no-changes">
+				                                            	</div>
+				                                            </th>
+				                                            <th>
+				                                            	<select name="type" id="filter_type" class="no-changes">
+				                                            		<option value="">请选择</option>
+				                                            	</select>
+				                                            </th>
+				                                            <th>
+				                                            	<div class="docter">
+				                                            		<input type="text" name="docter" id="docter" value="" class="input-text" />
+				                                            	</div>
+				                                            </th>
+				                                            <th>
+				                                            	<div class="start">
+					                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="start[from]" id="start" value="" class="input-text no-changes"></div>
+				                                            	</div>
+				                                            </th>
+				                                            <th>
+				                                            	<div class="end">
+					                                            	<div class="range-line"><span class="label">To:</span><input type="text" name="end[to]" id="end" value="" class="input-text no-changes"></div>
+				                                            	</div>
+				                                            </th>
+				                                            <th>
+				                                            	<select name="type" id="complete" class="no-changes">
+				                                            		<option value="">请选择</option>
+				                                            		<option value="0">未结束</option>
+				                                            		<option value="1">以结束</option>
+				                                            	</select>
+				                                            </th>
+				                                            <th>
+				                                            	<div class="info">
+				                                            		<a href="#">详情</a>
+				                                            	</div>
+				                                            </th>
+				                                        </tr>
+	                            					</thead>
+										        	<tbody>
+										                <tr class="even">
+										               		<td class="empty-text a-center" colspan="8">No records found.</td>
+										            	</tr>
+										            </tbody>
+    											</table>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div class="footer">
+					<include file="Common/footer"/>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+$(document).ready(function() {
+    //[id,title,start,end，全天日程，跨日日程,循环日程,theme,'','']          
+   var view="week";          
+    ﻿ __CURRENTDATA=[['6147','你好啊',new Date(1338427800000),new Date(1338431400000),0,0,1,0,1,'','']];
+    var op = {
+        view: view,
+        theme:3,
+        showday: new Date(),
+        EditCmdhandler:Edit,
+        DeleteCmdhandler:Delete,
+        ViewCmdhandler:View,    
+        onWeekOrMonthToDay:wtd,
+        onBeforeRequestData: cal_beforerequest,
+        onAfterRequestData: cal_afterrequest,
+        onRequestDataError: cal_onerror, 
+        url: "{$Think.config.Admin}Schedule/getSchedule?mode=get&id=<?php echo 1;?>" ,  
+        quickAddUrl: "calendar.php?mode=quickadd" ,  
+        quickUpdateUrl: "calendar.php?mode=quickupdate" ,  
+        quickDeleteUrl:  "calendar.php?mode=quickdelete" //快速删除日程的
+       /* timeFormat:" hh:mm t", //t表示上午下午标识,h 表示12小时制的小时，H表示24小时制的小时,m表示分钟
+	    tgtimeFormat:"ht" //同上 */             
+    };
+    var $dv = $("#calhead");
+    var _MH = document.documentElement.clientHeight;
+    var dvH = $dv.height() + 2;
+    op.height = _MH - dvH;
+    op.eventItems =__CURRENTDATA;
+
+    var p = $("#gridcontainer").bcalendar(op).BcalGetOp();
+    if (p && p.datestrshow) {
+        $("#txtdatetimeshow").text(p.datestrshow);
+    }
+    $("#caltoolbar").noSelect();
+    
+    $("#hdtxtshow").datepicker({ picker: "#txtdatetimeshow", showtarget: $("#txtdatetimeshow"),
+    onReturn:function(r){                          
+                    var p = $("#gridcontainer").BCalGoToday(r).BcalGetOp();
+                    if (p && p.datestrshow) {
+                        $("#txtdatetimeshow").text(p.datestrshow);
+                    }
+             } 
+    });
+    function cal_beforerequest(type)
+    {
+        var t="正在加载数据...";
+        switch(type)
+        {
+            case 1:
+                t="正在加载数据...";
+                break;
+            case 2:                      
+            case 3:  
+            case 4:    
+                t="正在处理请求...";                                   
+                break;
+        }
+        $("#errorpannel").hide();
+        $("#loadingpannel").html(t).show();    
+    }
+    function cal_afterrequest(type)
+    {
+        switch(type)
+        {
+            case 1:
+                $("#loadingpannel").hide();
+                break;
+            case 2:
+            case 3:
+            case 4:
+                $("#loadingpannel").html("操作成功!");
+                window.setTimeout(function(){ $("#loadingpannel").hide();},2000);
+            break;
+        }              
+       
+    }
+    function cal_onerror(type,data)
+    {
+        $("#errorpannel").show();
+    }
+    function Edit(data)
+    {
+       var eurl="";   
+        if(data)
+        {
+            var url = StrFormat(eurl,data);
+            OpenModelWindow(url,{ width: 600, height: 400, caption:"管理日程",onclose:function(){
+               $("#gridcontainer").BCalReload();
+            }});
+        }
+    }    
+    function View(data)
+    {
+        var vurl="";   
+        if(data)
+        {
+            var url = StrFormat(vurl,data);
+            OpenModelWindow(url,{ width: 600, height: 400, caption: "查看日程"});
+        }                
+    }    
+    function Delete(data,callback)
+    {  
+        $.alerts.okButton="确定";  
+        $.alerts.cancelButton="取消";  
+        hiConfirm("是否要删除该日程?", '确认',function(r){ r && callback(0);});           
+    }
+    function wtd(p)
+    {
+       if (p && p.datestrshow) {
+            $("#txtdatetimeshow").text(p.datestrshow);
+        }
+        $("#caltoolbar div.fcurrent").each(function() {
+            $(this).removeClass("fcurrent");
+        })
+        $("#showdaybtn").addClass("fcurrent");
+    }
+    //显示日视图
+    $("#showdaybtn").click(function(e) {
+        //document.location.href="#day";
+        $("#caltoolbar div.fcurrent").each(function() {
+            $(this).removeClass("fcurrent");
+        })
+        $(this).addClass("fcurrent");
+        var p = $("#gridcontainer").BCalSwtichview("day").BcalGetOp();
+        if (p && p.datestrshow) {
+            $("#txtdatetimeshow").text(p.datestrshow);
+        }
+    });
+    //显示周视图
+    $("#showweekbtn").click(function(e) {
+        //document.location.href="#week";
+        $("#caltoolbar div.fcurrent").each(function() {
+            $(this).removeClass("fcurrent");
+        })
+        $(this).addClass("fcurrent");
+        var p = $("#gridcontainer").BCalSwtichview("week").BcalGetOp();
+        if (p && p.datestrshow) {
+            $("#txtdatetimeshow").text(p.datestrshow);
+        }
+
+    });
+    //显示月视图
+    $("#showmonthbtn").click(function(e) {
+        //document.location.href="#month";
+        $("#caltoolbar div.fcurrent").each(function() {
+            $(this).removeClass("fcurrent");
+        })
+        $(this).addClass("fcurrent");
+        var p = $("#gridcontainer").BCalSwtichview("month").BcalGetOp();
+        if (p && p.datestrshow) {
+            $("#txtdatetimeshow").text(p.datestrshow);
+        }
+    });
+    
+    $("#showreflashbtn").click(function(e){
+        $("#gridcontainer").BCalReload();
+    });
+    
+    //点击新增日程
+    $("#faddbtn").click(function(e) {
+        var url ="";
+        OpenModelWindow(url,{ width: 500, height: 400, caption: "新增日程"});
+    });
+    //点击回到今天
+    $("#showtodaybtn").click(function(e) {
+        var p = $("#gridcontainer").BCalGoToday().BcalGetOp();
+        if (p && p.datestrshow) {
+            $("#txtdatetimeshow").text(p.datestrshow);
+        }
+
+
+    });
+    //上一个
+    $("#sfprevbtn").click(function(e) {
+        var p = $("#gridcontainer").BCalPrev().BcalGetOp();
+        if (p && p.datestrshow) {
+            $("#txtdatetimeshow").text(p.datestrshow);
+        }
+
+    });
+    //下一个
+    $("#sfnextbtn").click(function(e) {
+        var p = $("#gridcontainer").BCalNext().BcalGetOp();
+        if (p && p.datestrshow) {
+            $("#txtdatetimeshow").text(p.datestrshow);
+        }
+    });
+    $("#changetochinese").click(function(e){
+        location.href="?lang=zh-cn";
+    });
+    $("#changetoenglish").click(function(e){
+        location.href="?lang=en-us";
+    });
+     $("#changetoenglishau").click(function(e){
+        location.href="?lang=en-au";
+    });
+    
+});
+</script>
+</body>
+</html>

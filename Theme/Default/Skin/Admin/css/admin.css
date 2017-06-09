@@ -15,6 +15,7 @@
     padding: 0px; 
     min-width: 1024px;
     width: 100%;
+    background: #fff;
 }
 
 /**
@@ -148,6 +149,10 @@
 	line-height: 30px;
 }
 
+.container .middle .top a.button{
+	float: right;
+}
+
 .min-title{
 	font-size: 15px;
 	font-weight: 600;
@@ -223,9 +228,116 @@
 	cursor: initial;
 }
 
+/**
+ * button
+ */
+button{
+	border-width: 1px;
+    border-style: solid;
+    border-color: #ed6502 #a04300 #a04300 #ed6502;
+	background: #ffac47 url("../images/btn_bg.gif") repeat-x 0 100%; 
+	padding: 2px 7px 2px 7px;
+	color: #fff;
+  	font-size: 15px;
+    cursor: pointer;
+    text-align: center !important;
+    white-space: nowrap;
+}
+a.button{
+	border-width: 1px;
+    border-style: solid;
+    border-color: #ed6502 #a04300 #a04300 #ed6502;
+	background: #ffac47 url("../images/btn_bg.gif") repeat-x 0 100%; 
+	padding: 2px 7px 2px 7px;
+	color: #fff;
+  	font-size: 15px;
+    cursor: pointer;
+    text-align: center !important;
+    white-space: nowrap;
+    text-decoration: none;
+}
 
+/**
+ * tools
+ */
+.tools{
+	padding: 5px 0px;
+	margin-top: 10px;
+}
+.tools .page{
+	width: 75%;
+	float: left;
+}
+.tools .button{
+	text-align: right;
+	width: 25%;
+	float: left;
+}
 
-
+/**
+ * data table
+ */
+.data-table{
+	border: 1px solid #ccc;
+}
+.data-table table{
+	width: 100%;
+}
+.data-table th{
+	border: 1px solid #b9b9b9;
+	height: 25px;
+	text-align: center;
+}
+.data-table tr.headings {
+    background: url("../images/sort_row_bg.gif") 0 50% repeat-x;
+}
+.data-table tr.headings a{
+	text-decoration: none;
+	color: #000;
+	font-size: 13px;
+	font-weight: 600;
+	display: block;
+	line-height: 25px;
+	text-align: center;
+}
+.data-table tr.filter {
+    background: url("../images/filter_row_bg.gif") repeat-x #e3eff1;
+    cursor: default;
+}
+.data-table tr.filter .range-line{
+	margin: 2px 0px;
+}
+.data-table tr.filter .label {
+    display: block;
+    width: 55px;
+    float: left;
+    padding-left: 2px;
+    text-align: left;
+    height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.data-table tr.filter input{
+	width: 100px;
+	display: inline-block;
+	border: 1px solid #b5b5b5;
+	height: 20px;
+}
+.data-table tr.filter .name input{
+	width: 99%;
+}
+.data-table th select{
+	font-size: 12px;
+	width: 96%;
+}
+.empty-text{
+	text-align: center;
+	height: 50px;
+	vertical-align: middle;
+	background: #efefef;
+	font-size: 15px;
+	font-weight: 600;
+}
 
 
 
@@ -315,4 +427,21 @@
 }
 #addemployee .employee .content ul input{
 	margin-left: 14px;
+}
+
+/**
+ * employee list
+ */
+#listemployee .container .middle .top{
+	    padding: 20px 0px 0px 0px;
+}
+
+
+
+
+/**
+ * Tag list
+ */
+#tag .container .middle .top{
+	padding: 20px 0px 0px 0px;
 }
