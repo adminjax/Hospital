@@ -19,4 +19,15 @@ switchs = {
 	},
 }
 
+;
+var Vaildate = function(config){
+	this.selector = config.selector;
+	this.formclass = config.formClass;
+}
 
+Vaildate.prototype.form = function(){
+	var form = this.formclass;
+	jQuery(this.selector).on('click', function(){
+		jQuery(form).submit();
+	});
+}

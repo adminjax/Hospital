@@ -255,8 +255,19 @@ a.button{
     text-align: center !important;
     white-space: nowrap;
     text-decoration: none;
+    margin-left: 9px;
 }
-
+/*
+a.button.back {
+    border-color: #ccc #aaa #aaa #ccc;
+    background-color: #fff;
+    background-image: url("../images/btn_back_bg.gif");
+    color: #555;
+}
+a.back span{
+	background-image: url("../images/icon_btn_back.gif");
+}
+*/
 /**
  * tools
  */
@@ -329,6 +340,12 @@ a.button{
 .data-table th select{
 	font-size: 12px;
 	width: 96%;
+}
+.data-table tr{
+	border-bottom: 1px solid #b5b5b5;
+}
+.data-table tr td{
+	border-right: 1px solid #b5b5b5;
 }
 .empty-text{
 	text-align: center;

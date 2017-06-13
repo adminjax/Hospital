@@ -16,7 +16,7 @@
 				</div>
 				<div class="middle">
 					<div class="top">
-						<div class="title"><span>标签列表</span><a class="button" href="{$Think.config.ADMIN_URL}Employee/add">添加标签</a></div>
+						<div class="title"><span>标签列表</span><a class="button" href="{$Think.config.ADMIN_URL}Tag/addTag">添加标签</a></div>
 					</div>
 					<div class="tag_list">
 						<div class="tools clear">
@@ -98,9 +98,24 @@
                                     </tr>
             					</thead>
 					        	<tbody>
-					                <tr class="even">
-					               		<td class="empty-text a-center" colspan="8">No records found.</td>
-					            	</tr>
+					                <?php if($data): ?>
+                                        <?php foreach($data as $value): ?>
+                                            <tr>
+                                                <td><?php echo $value['tag_id']; ?></td>
+                                                <td><?php echo $value['tag_name']; ?></td>
+                                                <td><?php echo date('Y-m-d H:i:s', $value['created']); ?></td>
+                                                <td>
+                                                    <a href="{:U('Tag/delete', array('tag_id'=>$value['tag_id']))}">删除</a>
+                                                    <a href="{:U('Tag/addTag', array('tag_id'=>$value['tag_id']))}">修改</a>
+                                                </td>
+                                                <td><a href="{:U('Tag/addTag', array('tag_id'=>$value['tag_id']))}">详情</a></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr class="even">
+                                            <td class="empty-text a-center" colspan="8">No records found.</td>
+                                        </tr>
+                                    <?php endif; ?>
 					            </tbody>
 							</table>
 						</div>

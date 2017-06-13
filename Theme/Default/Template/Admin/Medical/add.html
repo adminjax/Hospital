@@ -2,20 +2,293 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>控制面板</title>
+	<title>添加档案</title>
 
 	<include file="Common/head" />
 
 </head>
 <body>
-	<div id="">
+	<div id="medical">
 		<div class="container">
 			<div class="box">
 				<div class="header">
 					<include file="Common/header"/>					
 				</div>
 				<div class="middle">
-					
+					<div class="medical clear left-right">
+						<div class="left">
+							<ul>
+								<li class="title"><span>添加档案</span></li>
+								<li id="base" class="active switch"><span>基础信息</span></li>
+								<li id="historical" class="switch"><span>历史病历</span></li>
+							</ul>
+						</div>
+						<div class="right">
+							<ul>
+								<li id="base" class="active">
+									<form class="docterForm" action="{$Think.config.ADMIN_URL}Medical/save" method="post">
+										<input type="hidden" name="m_id" value="<?php echo $data['m_id']; ?>" />
+										<div class="base-box">
+											<div class="top">
+												<div class="title">
+													<span>基础信息</span>
+													<a class="button save" href="javascript:void(0);">保存</a>
+													<a class="button" href="{$Think.config.ADMIN_URL}Medical/delete/m_id/<?php echo $data['m_id']; ?>">删除</a>
+													<a class="button back" href="javascript:history.go(-1);">后退</a>
+												</div>
+											</div>
+											<div class="content">
+												<div class="min-title"><span>基础信息</span></div>
+												<ul>
+													<li>
+														<label>头像</label>
+														<div class="upload">
+															<div class="formControls col-2">
+																<img id="avater" src="<?php echo $data['avater']?>" />
+																<input type="hidden" class="avaterurl" value="<?php echo $data['avater']?>" id="avaterurl"  name="avater"/>
+																<a href="javascript:void(0)" class="upAvater button avater" id="upAvater"><span>选择图片</span></a>
+															</div>
+															<script type="text/javascript">
+															    //图片上传
+															    jQuery(function() {
+																	var uploader = new plupload.Uploader({
+																		//创建实例的构造方法
+																		runtimes: 'html5,flash,silverlight,html4', //上传插件初始化选用那种方式的优先级顺序
+																		browse_button: 'upAvater', // 上传按钮
+																		url: "{:U('Employee/uploadImage')}", //远程上传地址
+																		filters: {
+																			max_file_size: '10mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+																			mime_types: [//允许文件上传类型
+																				{title: "files", extensions: "jpg,png,gif"}
+																			]
+																		},
+																		init: {
+																			FilesAdded: function(up, files) { //文件上传前
+																				uploader.start();
+																			},
+																			FileUploaded: function(up, file, info) { //文件上传成功的时候触发
+																				var data = JSON.parse(info.response);
+																				console.log(data);
+																				jQuery('#avaterurl').attr('value', data);
+																				jQuery('#avater').attr('src', data);
+																			}
+																		}
+																	});
+																	uploader.init();
+															    });
+
+															    switchs.init('.switch');
+													    	</script> 
+														</div>
+													</li>
+													<li>
+														<label>姓名</label><input type="text" name="name" value="<?php echo $data['name']?>" />
+													</li>
+													<li>
+														<label>性别</label>
+														<select class="gander" name="gender">
+															<option>请选择</option>
+															<option value="0" <?php if($data['gender'] == '0'){echo 'selected = "selected"';}?>>女</option>
+															<option value="1" <?php if($data['gender'] == '1'){echo 'selected = "selected"';}?>>男</option>
+														</select>
+													</li>
+													<li>
+														<label>年龄</label><input type="text" name="age" value="<?php echo $data['age']?>" />
+													</li>
+													<li>
+														<label>手机号</label><input type="text" name="phone" value="<?php echo $data['phone']?>" />
+													</li>
+													<li>
+														<label>主治医生</label>
+														<select class="docter" name="docter">
+															<option>请选择</option>
+															<option value="docter1" <?php if($data['docter'] == 'docter1'){echo 'selected = "selected"';}?>>docter1</option>
+															<option value="docter2" <?php if($data['docter'] == 'docter2'){echo 'selected = "selected"';}?>>docter2</option>
+															<option value="docter3" <?php if($data['docter'] == 'docter3'){echo 'selected = "selected"';}?>>docter3</option>
+														</select>
+													</li>
+													<li>
+														<label>选择标签</label>
+														<select class="tag" name="tag">
+															<option>请选择</option>
+															<option value="tag1" <?php if($data['tag_name'] == 'tag1'){echo 'selected = "selected"';}?>>tag1</option>
+															<option value="tag2" <?php if($data['tag_name'] == 'tag2'){echo 'selected = "selected"';}?>>tag2</option>
+															<option value="tag3" <?php if($data['tag_name'] == 'tag3'){echo 'selected = "selected"';}?>>tag3</option>
+														</select>
+													</li>
+													<li>
+														<label>开始时间</label><input type="text" name="start" value="<?php echo $data['start']?>" />
+													</li>
+													<li>
+														<label>结束时间</label><input type="text" name="end" value="<?php echo $data['end']?>" />
+													</li>
+													<li>
+														<label>是否结束</label>
+														<select class="over" name="over">
+															<option>请选择</option>
+															<option value="0" <?php if($data['over'] == '0'){echo 'selected = "selected"';}?>>否</option>
+															<option value="1" <?php if($data['over'] == '1'){echo 'selected = "selected"';}?>>是</option>
+														</select>
+													</li>
+													<li>
+														<label>个人简介</label>
+														<div class="file">
+															<!-- 加载编辑器的容器 -->
+														    <script id="file" name="file" type="text/plain"></script>
+															<!-- 实例化编辑器 -->
+														    <script type="text/javascript">
+														    	var content = "<?php echo html_entity_decode($data['content']);?>";
+														    	content = content.replace(/&lt;/g, '<');
+														    	content = content.replace(/&gt;/g, '>');
+														        var ue = UE.getEditor('file');
+														        ue.ready(function(){
+														        	ue.setContent(content);  //赋值给UEditor  
+														        });   
+														    </script>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<script type="text/javascript">
+											var config = {
+												selector : ".save",
+												formClass : ".docterForm",
+											}
+											var vaildate = new Vaildate(config)
+											vaildate.form();
+										</script>
+									</form>
+								</li>
+								<li id="historical" class="">
+									<div class="historical-box">
+										<div class="top">
+											<div class="title"><span>历史病人</span></div>
+										</div>
+										<div class="content">
+											<div class="tools clear">
+												<div class="page">
+													sdfs
+												</div>
+												<div class="button">
+													<button class="reset"><span>重置条件</span></button>
+													<button class="search"><span>搜索</span></button>
+												</div>
+											</div>
+											<div class="data-table">
+												<table cellspacing="0" class="data" id="historical-data">
+						                			<colgroup>
+										                <col width="100">
+										                <col>
+										                <col width="100">
+										                <col width="100">
+										                <col width="80">
+										                <col width="100">
+										                <col width="80">
+										                <col width="35">
+						                            </colgroup>
+                            						<thead>
+                                    					<tr class="headings">
+				                                            <th>
+				                                            	<a href="#" name="entity_id" title="降序" class="sort-arrow-desc">
+				                                            		<span class="entity_id">ID</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="name" title="asc" class="not-sort">
+				                                            		<span class="name">名字</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="type" title="asc" class="not-sort">
+				                                            		<span class="type">类型</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="docter" title="asc" class="not-sort">
+				                                            		<span class="docter">主治医师</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+					                                            <a href="#" name="start" title="asc" class="not-sort">
+					                                            	<span class="start">开始时间</span>
+					                                            </a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="end" title="asc" class="not-sort">
+				                                            		<span class="end">结束时间</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="complete" title="asc" class="not-sort">
+				                                            		<span class="complete">是否结束</span>
+				                                            	</a>
+				                                            </th>
+				                                            <th>
+				                                            	<a href="#" name="info" title="asc" class="not-sort">
+				                                            		<span class="info">详情</span>
+				                                            	</a>
+				                                            </th>
+				                                        </tr>
+	                                                    <tr class="filter">
+				                                            <th>
+				                                            	<div class="entity_id">
+					                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="entity_id[from]" id="entity_id_from" value="" class="input-text no-changes"></div>
+					                                            	<div class="range-line"><span class="label">To:</span><input type="text" name="entity_id[to]" id="entity_id_to" value="" class="input-text no-changes"></div>
+				                                            	</div>
+				                                            </th>
+				                                            <th>
+				                                            	<div class="name">
+				                                            		<input type="text" name="name" id="name" value="" class="input-text no-changes">
+				                                            	</div>
+				                                            </th>
+				                                            <th>
+				                                            	<select name="type" id="filter_type" class="no-changes">
+				                                            		<option value="">请选择</option>
+				                                            	</select>
+				                                            </th>
+				                                            <th>
+				                                            	<div class="docter">
+				                                            		<input type="text" name="docter" id="docter" value="" class="input-text" />
+				                                            	</div>
+				                                            </th>
+				                                            <th>
+				                                            	<div class="start">
+					                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="start[from]" id="start" value="" class="input-text no-changes"></div>
+				                                            	</div>
+				                                            </th>
+				                                            <th>
+				                                            	<div class="end">
+					                                            	<div class="range-line"><span class="label">To:</span><input type="text" name="end[to]" id="end" value="" class="input-text no-changes"></div>
+				                                            	</div>
+				                                            </th>
+				                                            <th>
+				                                            	<select name="type" id="complete" class="no-changes">
+				                                            		<option value="">请选择</option>
+				                                            		<option value="0">未结束</option>
+				                                            		<option value="1">以结束</option>
+				                                            	</select>
+				                                            </th>
+				                                            <th>
+				                                            	<div class="info">
+				                                            		<a href="#">详情</a>
+				                                            	</div>
+				                                            </th>
+				                                        </tr>
+	                            					</thead>
+										        	<tbody>
+										                <tr class="even">
+										               		<td class="empty-text a-center" colspan="8">No records found.</td>
+										            	</tr>
+										            </tbody>
+    											</table>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 				<div class="footer">
 					<include file="Common/footer"/>

@@ -133,9 +133,27 @@
                                     </tr>
             					</thead>
 					        	<tbody>
-					                <tr class="even">
-					               		<td class="empty-text a-center" colspan="8">No records found.</td>
-					            	</tr>
+					                <?php if($data): ?>
+                                        <?php foreach($data as $value): ?>
+                                            <tr>
+                                                <td><?php echo $value['m_id']; ?></td>
+                                                <td><?php echo $value['name']; ?></td>
+                                                <td><?php echo date('Y-m-d H:i:s', $value['start']); ?></td>
+                                                <td><?php echo date('Y-m-d H:i:s', $value['end']); ?></td>
+                                                <td><?php echo $value['docter']; ?></td>
+                                                <td><?php echo $value['over']; ?></td>
+                                                <td>
+                                                    <a href="{:U('Medical/delete', array('m_id'=>$value['m_id']))}">删除</a>
+                                                    <a href="{:U('Medical/add', array('m_id'=>$value['m_id']))}">修改</a>
+                                                </td>
+                                                <td><a href="{:U('Medical/add', array('m_id'=>$value['m_id']))}">详情</a></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr class="even">
+                                            <td class="empty-text a-center" colspan="8">No records found.</td>
+                                        </tr>
+                                    <?php endif; ?>
 					            </tbody>
 							</table>
 						</div>

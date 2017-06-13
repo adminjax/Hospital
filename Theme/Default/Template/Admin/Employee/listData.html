@@ -98,9 +98,24 @@
                                     </tr>
             					</thead>
 					        	<tbody>
-					                <tr class="even">
-					               		<td class="empty-text a-center" colspan="8">No records found.</td>
-					            	</tr>
+					                <?php if($data): ?>
+                                        <?php foreach($data as $value): ?>
+                                            <tr class="even">
+                                                <td class=""><?php echo $value['d_id']; ?></td>
+                                                <td class=""><?php echo $value['name']; ?></td>
+                                                <td class=""><?php echo date('Y-m-d H:i', time()); ?></td>
+                                                <td class="">
+                                                    <a href="{:U('Employee/delete', array('d_id'=>$value['d_id']))}">删除</a>
+                                                    <a href="{:U('Employee/add', array('d_id'=>$value['d_id']))}">修改</a>
+                                                </td>
+                                                <td class=""><a href="{:U('Employee/add', array('d_id'=>$value['d_id']))}">详情</a></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr class="even">
+                                            <td class="empty-text a-center" colspan="8">No records found.</td>
+                                        </tr>
+                                    <?php endif; ?>
 					            </tbody>
 							</table>
 						</div>

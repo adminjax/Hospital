@@ -8,6 +8,7 @@
  * @package     App_Admin
  */
 namespace Admin\Controller;
+use Admin\Model;
 
 /**
  * 医生类
@@ -16,6 +17,11 @@ class EmployeeController extends CommonController
 {
 	//数据存储容器
 	private $data = array();
+
+	//模型容器
+	private $table = array(
+			'model' => 'Employee',
+		);
 
 	/**
 	 * 初始化操作
@@ -34,7 +40,12 @@ class EmployeeController extends CommonController
      * [listInfo 获取雇员列表信息]
      * @return [type] [description]
      */
-	public function listData(){		
+	public function listData(){	
+		$docter = D($this->table['model']);
+		$data = $docter->getEmployeeList();
+		if($data){
+			$this->assign('data', $data);
+		}
 		$this->display();
 	}
 
@@ -42,6 +53,14 @@ class EmployeeController extends CommonController
 	 * [addEmployee 添加雇员信息]
 	 */
 	public function add(){
+		$id = I('get.d_id', '', 'int');
+		if($id > 0){
+			$docter = D($this->table['model']);
+			$data = $docter->getEmployeeById($id);
+			if($data){
+				$this->assign('data', $data);
+			}
+		}
 		$this->display();
 	}
 
@@ -53,21 +72,44 @@ class EmployeeController extends CommonController
 		//医生信息
 		$this->data['avater'] = I('post.avater', '', 'addslashes');
 		$this->data['name'] = I('post.name', '', 'addslashes');
-		$this->data['gander'] = I('post.gander', '', 'addslashes');
+		$this->data['gender'] = I('post.gender', '', 'addslashes');
 		$this->data['phone'] = I('post.phone', '', 'addslashes');
-		$this->data['profile'] = I('post.profile', '', 'addslashes');
+		$this->data['brief'] = htmlspecialchars (I('post.content')); 
 
 		//判断是修改，还是添加
 		$id = I('post.id', 0, 'int');
-		$docter = D();
+		$docter = D($this->table['model']);
 		if($id > 0){
 			$this->data['id'] = $id;
-			$flag = $docter->update($this->data);
+			$flag = $docter->updateData(array_filter($this->data));
+			if($flag > 0){
+				$this->redirect('Employee/add', array('d_id'=>$flag));
+				return true;
+			}
 		}else{
-			$flag = $docter->add($this->data);
+			$flag = $docter->addData($this->data);
+			if($flag > 0){
+				return true;
+			}
 		}
 
-		return $flag;
+		return false;
+	}
+
+	/**
+	 * [delete 删除医生]
+	 * @return [type] [description]
+	 */
+	public function delete(){
+		$id = I('get.d_id', '' , 'int');
+		if($id > 0){
+			$docter = D($this->table['model']);
+			$data = $docter->deleteData($id);
+			if($data > 0){
+				$this->redirect('Employee/listData');
+				return true;
+			}
+		}
 	}
 
 	/**
@@ -94,6 +136,17 @@ class EmployeeController extends CommonController
 				break;
 		}
 		return $flag;
+	}
+
+	/**
+	 * [uploadImage 上传头像]
+	 * @return [type] [description]
+	 */
+	public function uploadImage(){
+		$upload = A('Common/Upload');
+		$image = C('SITE_URL').$upload->image(5000000, C('AVATER'));
+		
+		echo json_encode($image);
 	}
 }
 ?>
