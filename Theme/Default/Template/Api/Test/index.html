@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<script type="text/javascript" src="{$Think.config.LIB}jquery.3.1.js"></script>
+
+</head>
+<body>
+	<div>
+		<button class="get"><span>GET</span></button>
+		<button class="put"><span>PUT</span></button>
+		<button class="delete"><span>DELETE</span></button>
+		<button class="update"><span>UPDATE</span></button>
+	</div>
+	<script type="text/javascript">
+		jQuery('.get').click(function(){
+			jQuery.ajax({
+				url:"api/index",
+				method:"get",
+				dataType:"json",
+				data:{"id":"12345"},
+				success:function(data){
+					console.log(data);
+				}
+			});
+		});
+	</script>
+</body>
+</html>

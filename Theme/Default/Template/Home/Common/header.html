@@ -1,0 +1,19 @@
+<div class="header clear">
+	<div class="left">
+		<span class="border"><img class="avater" src="{$Think.config.SITE_URL}Public/Images/Avater/20170613/593f50f7380a3.jpg" /></span>
+	</div>
+	<div class="right">
+		<div>
+			<span class="user">登录用户:<?php echo session("user.name"); ?></span>
+			<span class="logout"><a href="{:U('Index/logout')}">退出</a></span>
+		</div>
+	</div>
+</div>
+<div class="nav-bar">
+	<ul class="clear">
+		<li><a href="{:U('Dashboard/index')}"><span>首页</span></a></li>
+		<li><a href="{:U('Schedule/index')}"><span>预约中心</span></a></li>
+		<li><a href="{:U('History/index')}"><span>历史信息</span></a></li>
+		<li><a href="{:U('Account/index')}"><span>个人中心</span></a></li>
+	</ul>
+</div>

@@ -5,33 +5,36 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
 	<title>登录</title>
 	<link rel="stylesheet" type="text/css" href="{$Think.config.SKIN}Home/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="{$Think.config.SKIN}Home/css/index.css">
 </head>
 <body>
-	<div id="login">
-		<div class="container">
-			<div class="top">
-				<img src="">
-				<span>美齐口腔个人预约系统</span>
-			</div>
-			<div class="middle">
-				<form class="login-form">
-					<ul>
-						<li>
-							<label>用户名：</label>
-							<input type="text" name="username" value="" />
-						</li>
-						<li>
-							<label>密码：</label>
-							<input type="password" name="password" value="" />
-						</li>
-						<li>
-							<button><span>登录</span></button>
-						</li>
-					</ul>
-				</form>
-			</div>
-			<div class="bottom">
-				<p>Copyright © 2017-2020, 美齐口腔, All Rights Reserved</p>
+	<div class="box index">
+		<div id="login">
+			<div class="container">
+				<div class="top">
+					<img src="">
+					<span>美齐口腔个人预约系统</span>
+				</div>
+				<div class="middle">
+					<form class="login-form" method="post" action="{:U('Index/login')}">
+						<ul>
+							<li>
+								<label>用户名：</label>
+								<input type="text" name="username" value="" />
+							</li>
+							<li>
+								<label>密<span class="spl">吗</span>码：</label>
+								<input type="password" name="password" value="" />
+							</li>
+							<li>
+								<button><span>登录</span></button>
+							</li>
+						</ul>
+					</form>
+				</div>
+				<div class="bottom">
+					<p>Copyright © 2017-2020, 美齐口腔, All Rights Reserved</p>
+				</div>
 			</div>
 		</div>
 	</div>

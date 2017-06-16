@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+	<title>个人面板</title>
+
+	<include file="Common/head" />
+
+</head>
+<body>
+	<div class="box">
+		<div id="account">
+			<div class="container">
+				<div class="top">
+
+					<include file="Common/header" />
+					
+				</div>
+				<div class="middle">
+					<div class="content">
+						<div class="title">
+							<span>档案信息</span>
+						</div>
+						<div class="form">
+							<form class="update-form" method="post" action="{:U('Accout/update')}">
+								<ul>
+									<li>
+										<div class="avater">
+											<div class="formControls col-2">
+												<img id="avater" src="<?php echo $data['avater']?>" />
+												<input type="hidden" class="avaterurl" value="<?php echo $data['avater']?>" id="avaterurl"  name="avater"/>
+												<a href="javascript:void(0)" class="upAvater button avater" id="upAvater"><span>上传头像</span></a>
+											</div>
+											<script type="text/javascript">
+											    //图片上传
+											    jQuery(function() {
+													var uploader = new plupload.Uploader({
+														//创建实例的构造方法
+														runtimes: 'html5,flash,silverlight,html4', //上传插件初始化选用那种方式的优先级顺序
+														browse_button: 'upAvater', // 上传按钮
+														url: "{:U('Account/uploadImage')}", //远程上传地址
+														filters: {
+															max_file_size: '10mb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+															mime_types: [//允许文件上传类型
+																{title: "files", extensions: "jpg,png,gif"}
+															]
+														},
+														init: {
+															FilesAdded: function(up, files) { //文件上传前
+																uploader.start();
+															},
+															FileUploaded: function(up, file, info) { //文件上传成功的时候触发
+																var data = JSON.parse(info.response);
+																console.log(data);
+																jQuery('#avaterurl').attr('value', data);
+																jQuery('#avater').attr('src', data);
+															}
+														}
+													});
+													uploader.init();
+											    });
+									    	</script> 
+										</div>
+									</li>
+									<li class="clear">
+										<label>档案编号：</label><span><?php echo $data['medical_num']; ?></span>
+									</li>
+									<li class="clear">
+										<label>姓名：</label><span><?php echo $data['name']; ?></span>
+									</li>
+									<li class="clear">
+										<label>登录名：</label><span><?php echo $data['username']; ?></span>
+									</li>
+									<li class="clear">
+										<label>性别：</label><span><?php if($data['gender'] == 0){echo '女';}else{echo '男';}; ?></span>
+									</li>
+									<li class="clear">
+										<label>年龄：</label><span><?php echo $data['age']; ?></span>
+									</li>
+									<li class="clear">
+										<label>手机号：</label><span><?php echo $data['phone']; ?></span>
+									</li>
+									<li class="clear">
+										<label>主治医师：</label><span><?php echo $data['docter']; ?></span>
+									</li>
+									<li class="clear">
+										<label>标签：</label><span><?php echo $data['tag_name']; ?></span>
+									</li>
+									<li class="clear">
+										<label>建档时间：</label><span><?php echo date('Y-m-d', $data['start']); ?></span>
+									</li>
+									<li class="clear">
+										<label>结束时间：</label><span><?php if($data['end']){echo date('Y-m-d', $data['end']);}else{echo '---';} ?></span>
+									</li>
+								</ul>
+							</form>
+						</div>
+					</div>	
+				</div>
+				<div class="bottom">
+					<p>Copyright © 2017-2020, 美齐口腔, All Rights Reserved</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

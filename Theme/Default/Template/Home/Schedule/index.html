@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+	<title>预约</title>
+
+	<include file="Common/head" />
+
+</head>
+<body>
+	<div class="box">
+		<div id="dashboard">
+			<div class="container">
+				<div class="top">
+
+					<include file="Common/header" />
+					
+				</div>
+				<div class="middle">
+					<div class="content">
+						<ul>
+							<li><label>姓名：</label><span>asdf</span></li>
+							<li>
+								<label>选择医生：</label>
+								<select class="docter" name="docter">
+									<option>请选择</option>
+									<option>docter1</option>
+									<option>docter2</option>
+								</select>
+							</li>
+							<li>
+								<label>预约时间：</label><input placeholder="选择时间" name="time" class="time" value="" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+							</li>
+							<li>
+								<label>医生已预约：</label>
+								<div class="schedule">
+									<ul>
+										<li><label><?php echo date('Y-m-d H:i', time()); ?></label><span>排号：1</span></li>
+										<li><label><?php echo date('Y-m-d H:i', time()); ?></label><span>排号：2</span></li>
+										<li><label><?php echo date('Y-m-d H:i', time()); ?></label><span>排号：3</span></li>
+										<li><label><?php echo date('Y-m-d H:i', time()); ?></label><span>排号：4</span></li>
+										<li><label><?php echo date('Y-m-d H:i', time()+90000); ?></label><span>排号：5</span></li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<button><span>预约</span></button>
+							</li>
+						</ul>
+					</div>
+					<script type="text/javascript">
+						var nowTime = "<?php echo date('Y-m-d: H:i', time()); ?>";
+
+						jQuery("button").click(function(){
+							var time = jQuery(".time").val();
+							var docter = jQuery(".docter").val();
+							var lastTime = jQuery('.schedule li:last-child').find('label').text();
+
+							if(nowTime > time){
+								alert('请选择正确的时间!');
+								return false;
+							}
+
+							if(lastTime >= time){
+								alert('当前时间已有预约，请选择后面的时间!');
+								return false;
+							}
+
+							jQuery.ajax({
+								url : "{:U('Schedule/add')}",
+								type : "GET",
+								data : "docter="+docter+"&time="+time,
+								success : function(data){
+									if(data == true){
+										alert("预约成功!");
+									}
+								}
+							});
+						});
+					</script>	
+				</div>
+				<div class="bottom">
+					<p>Copyright © 2017-2020, 美齐口腔, All Rights Reserved</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
