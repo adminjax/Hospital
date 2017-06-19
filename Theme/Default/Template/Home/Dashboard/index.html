@@ -18,7 +18,25 @@
 					
 				</div>
 				<div class="middle">
-
+					<div class="docter">
+						<div class="title"><span>医师列表</span></div>
+						<div class="content">
+							<ul>
+								<?php foreach($data as $value): ?>
+								<li>
+									<div class="left">
+										<img src="<?php echo $value['avater']; ?>" />
+									</div>
+									<div class="right">
+										<div class="name"><?php echo $value['name']; ?></div>
+										<div class="content"><?php echo html_entity_decode($value['brief']); ?></div>
+										<div class="date"><?php echo $value['name']; ?></div>
+									</div>
+								</li>
+								<?php endforeach; ?>
+							</ul>
+						</div>
+					</div>
 				</div>
 				<div class="bottom">
 					<p>Copyright © 2017-2020, 美齐口腔, All Rights Reserved</p>

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="box">
-		<div id="dashboard">
+		<div id="schedule">
 			<div class="container">
 				<div class="top">
 
@@ -20,28 +20,37 @@
 				<div class="middle">
 					<div class="content">
 						<ul>
-							<li><label>姓名：</label><span>asdf</span></li>
-							<li>
+							<li class="clear">
+								<label>姓名：</label>
+								<span><?php echo session('user.name'); ?></span>
+							</li>
+							<li class="clear">
 								<label>选择医生：</label>
 								<select class="docter" name="docter">
-									<option>请选择</option>
-									<option>docter1</option>
-									<option>docter2</option>
+									<option value="">请选择</option>
+									<?php foreach($data as $value): ?>
+										<option value="<?php echo $value['d_id'];?>"><?php echo $value['name'];?></option>
+									<?php endforeach; ?>
 								</select>
 							</li>
-							<li>
-								<label>预约时间：</label><input placeholder="选择时间" name="time" class="time" value="" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+							<li class="clear">
+								<label>预约时间：</label>
+								<input placeholder="选择时间" name="time" class="time" value="" onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
 							</li>
-							<li>
-								<label>医生已预约：</label>
+							<li class="clear">
+								<label>预约列表：</label>
 								<div class="schedule">
-									<ul>
-										<li><label><?php echo date('Y-m-d H:i', time()); ?></label><span>排号：1</span></li>
-										<li><label><?php echo date('Y-m-d H:i', time()); ?></label><span>排号：2</span></li>
-										<li><label><?php echo date('Y-m-d H:i', time()); ?></label><span>排号：3</span></li>
-										<li><label><?php echo date('Y-m-d H:i', time()); ?></label><span>排号：4</span></li>
-										<li><label><?php echo date('Y-m-d H:i', time()+90000); ?></label><span>排号：5</span></li>
-									</ul>
+									<table>
+										<thead>
+											<tr>
+												<th><span class="sort">序号</span></th>
+												<th><span class="time">预约时间</span></th>
+											</tr>
+										</thead>
+										<tbody>
+											
+										</tbody>
+									</table>
 								</div>
 							</li>
 							<li>
@@ -50,38 +59,77 @@
 						</ul>
 					</div>
 					<script type="text/javascript">
-						var nowTime = "<?php echo date('Y-m-d: H:i', time()); ?>";
+						var nowTime = "<?php echo date('Y-m-d H:i', time()); ?>";
+						var name = "<?php echo session('user.name'); ?>";
+
+						jQuery(".docter").change(function(){
+							var docter = jQuery(".docter").val();
+							jQuery.ajax({
+								url : "{:U('Schedule/getDocterList')}",
+								type : "GET",
+								data : "docter="+docter,
+								success : function(data){
+									var str;
+									for (var i = 0; i < data.length; i++) {
+										if(data[i].name == name){
+											var cls = 'class="my-order"';
+										}
+										str = str + "<tr "+cls+"><td><span>"+(i+1)+"</span></td><td><span>"+DateTime.UnixToDate(data[i].time)+"</span></td></tr>";
+									}
+									
+									jQuery('.schedule').find('tbody').html(str);
+								}
+							});
+						});
 
 						jQuery("button").click(function(){
 							var time = jQuery(".time").val();
 							var docter = jQuery(".docter").val();
-							var lastTime = jQuery('.schedule li:last-child').find('label').text();
+
+							var time1 = time.substring(0, 11)+"09:00:00";
+							var time2 = time.substring(0, 11)+"11:00:00";
+							var time3 = time.substring(0, 11)+"13:00:00";
+							var time4 = time.substring(0, 11)+"17:00:00";
+
+							if(!docter){
+								alert('请选择医生！')
+								return false;
+							}
 
 							if(nowTime > time){
-								alert('请选择正确的时间!');
+								alert('不能选择当前时间之前的时间!');
 								return false;
 							}
 
-							if(lastTime >= time){
-								alert('当前时间已有预约，请选择后面的时间!');
-								return false;
-							}
+							if((time > time1 && time < time2) || (time > time3 && time < time4)){
+								jQuery.ajax({
+									url : "{:U('Schedule/add')}",
+									type : "GET",
+									data : "docter="+docter+"&time="+time,
+									success : function(data){
+										var str;
+										for (var i = 0; i < data.length; i++) {
+											if(data[i].name == name){
+												var cls = 'class="my-order"';
+											}
+											str = str + "<tr "+cls+"><td><span>"+(i+1)+"</span></td><td><span>"+DateTime.UnixToDate(data[i].time)+"</span></td></tr>";
+										}
+										jQuery('.schedule').find('tbody').html(str);
 
-							jQuery.ajax({
-								url : "{:U('Schedule/add')}",
-								type : "GET",
-								data : "docter="+docter+"&time="+time,
-								success : function(data){
-									if(data == true){
-										alert("预约成功!");
+										if(data){
+											alert("预约成功!");
+										}
 									}
-								}
-							});
+								});
+							}else{
+								alert('请选择上午9:00点到11:00点，或下午13:00点到17:00点！');
+								return false;	
+							}
 						});
 					</script>	
 				</div>
 				<div class="bottom">
-					<p>Copyright © 2017-2020, 美齐口腔, All Rights Reserved</p>
+					<p>Copyright © 2016-2020, 美齐口腔, All Rights Reserved</p>
 				</div>
 			</div>
 		</div>

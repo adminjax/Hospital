@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="box">
-		<div id="dashboard">
+		<div id="history">
 			<div class="container">
 				<div class="top">
 
@@ -18,7 +18,33 @@
 					
 				</div>
 				<div class="middle">
-					
+					<div class="history">
+						<div class="title"><span>预约历史</span></div>
+						<div class="content">
+							<table>
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>预约时间</th>
+										<th>医生</th>
+										<th>状态</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php $i=1;foreach($data as $value): ?>
+									<tr>
+										<td><?php echo $i; ?></td>
+										<td><?php echo $value['time']; ?></td>
+										<td><?php echo $value['docter']; ?></td>
+										<td><?php echo $value['is_active']; ?></td>
+										<td><a href="{:U('history/delete', array('id'=>$value['o_id']))}"><span>取消预约</span></a></td>
+									</tr>
+									<?php $i++;endforeach; ?>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 				<div class="bottom">
 					<p>Copyright © 2017-2020, 美齐口腔, All Rights Reserved</p>

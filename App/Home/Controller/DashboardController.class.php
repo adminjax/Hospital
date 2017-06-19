@@ -14,7 +14,7 @@ class DashboardController extends Controller
 {
 	//模型容器
 	private $model = array(
-			'login' => 'login'
+			'docter' => 'dashboard'
 		);
 
 	/**
@@ -22,6 +22,12 @@ class DashboardController extends Controller
 	 * @return [type] [description]
 	 */
     public function index(){
+    	$docter = D($this->model['docter']);
+    	$data = $docter->getAllDocter();
+
+    	if($data){
+    		$this->assign('data', $data);
+    	}
         $this->display();
     }
 }

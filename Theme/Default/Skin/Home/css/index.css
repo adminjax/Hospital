@@ -197,3 +197,91 @@ a{
 	color: #fff;
 	font-size: 15px;
 }
+
+
+#schedule .content li>label,
+#schedule .content li>span,
+#schedule .content li>select,
+#schedule .content li>input{
+	display: block;
+	float: left;
+	
+}
+#schedule .content li>label{
+	width:35%;
+	font-size: 15px;
+	color: #151515;
+	font-weight: 600;
+	text-align: right;
+}
+#schedule .content li{
+	margin:10px 0px;
+}
+#schedule .content li>select,
+#schedule .content li>input{
+	display: block;
+	float: left;
+	border: 1px solid #151515;
+	width: 170px;
+}
+.schedule table{
+	width: 60%;
+}
+.schedule table th,
+.schedule table td{
+	border: 1px solid;
+	font-size: 15px;
+	font-weight: 600;
+	height: 30px;
+	line-height: 30px;
+}
+.schedule table td{
+	font-size: 15px;
+	font-weight: 400;
+}
+
+#schedule button{
+	border: 1px solid;
+	width: 100px;
+	height: 30px;
+	font-size: 20px;
+}
+.schedule{
+	overflow:auto;
+	height: 300px
+}
+.schedule table{
+	width: 90%;
+}
+.my-order{
+	background: red;
+}
+
+.history .title{
+	font-size: 20px;
+	font-weight: 600;
+	width: 96%;
+	margin: auto;
+	text-align: left;
+}
+.history .content{
+	width: 96%;
+	margin: auto;
+	margin-top: 10px;
+}
+.history .content table{
+	width: 100%;
+}
+.history .content table th,
+.history .content table td{
+	border: 1px solid;
+	height: 25px;
+	line-height: 25px;
+}
+.history .content table th{
+	font-size: 18px;
+	font-weight: 600;
+}
+.history .content table td{
+	font-size: 15px;
+}
