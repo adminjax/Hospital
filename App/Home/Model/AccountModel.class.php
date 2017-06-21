@@ -30,9 +30,9 @@ class AccountModel extends Model
 	 */
 	public function getAvater($id){
 		$user = M($this->table['user']);
-		$data = $user->where('m_id = '.$id)->getField('avater');
+		$data = $user->where('m_id = '.$id)->find();
 
-		return $data;
+		return $data['avater'];
 	}
 
 	/**

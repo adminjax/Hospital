@@ -42,5 +42,16 @@ class AccountController extends Controller
 
         $this->display();
     }
+
+    /**
+     * [getAvater 获取头像]
+     * @return [type] [description]
+     */
+    public function getAvater(){
+    	$account = D($this->model['account']);
+    	$data = $account->getAvater(session('user.m_id'));
+
+    	return $data;
+    }
 }
 ?>

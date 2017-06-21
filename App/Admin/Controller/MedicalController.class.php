@@ -74,7 +74,7 @@ class MedicalController extends CommonController
         $this->data['phone'] = I('post.phone', '', 'addslashes');
         $this->data['docter'] = I('post.docter', '', 'addslashes');
         $this->data['tag_name'] = I('post.tag', '', 'addslashes');
-        $this->data['content'] = htmlentities(I('post.file'));
+        $this->data['content'] = htmlspecialchars(I('post.file'));
         $this->data['start'] = I('post.start', '', 'addslashes');
         $this->data['end'] = I('post.end', '', 'addslashes');
         $this->data['over'] = I('post.over', '', 'int');

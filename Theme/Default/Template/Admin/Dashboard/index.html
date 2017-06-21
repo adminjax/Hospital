@@ -18,8 +18,185 @@
 					<div class="top">
 						<div class="title"><span>控制面板</span></div>
 					</div>
-					<div class="content">
-						ss
+					<div class="content clear">
+						<div class="left">
+							<div class="min-title">今天预约</div>
+							<div class="notes data-table">
+								<table cellspacing="0" class="data" id="notes">
+									<colgroup>
+										<col width="100px">
+										<col width="">
+										<col width="160px">
+										<col width="">
+										<col width="50px">
+									</colgroup>
+									<thead>
+										<tr class="headings">
+											<th>
+	                                        	<a href="#" name="entity_id" title="降序" class="sort-arrow-desc">
+	                                        		<span class="entity_id">ID</span>
+	                                        	</a>
+	                                        </th>
+	                                        <th>
+	                                        	<a href="#" name="name" title="asc" class="not-sort">
+	                                        		<span class="name">病人名</span>
+	                                        	</a>
+	                                        </th>
+	                                        <th>
+	                                        	<a href="#" name="type" title="asc" class="not-sort">
+	                                        		<span class="type">预约时间</span>
+	                                        	</a>
+	                                        </th>
+	                                        <th>
+	                                        	<a href="#" name="type" title="asc" class="not-sort">
+	                                        		<span class="type">主治医生</span>
+	                                        	</a>
+	                                        </th>
+	                                        <th>
+	                                        	<a href="#" name="docter" title="asc" class="not-sort">
+	                                        		<span class="docter">状态</span>
+	                                        	</a>
+	                                        </th>
+										</tr>
+										<tr class="filter">
+											<th>
+	                                        	<div class="entity_id">
+	                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="entity_id[from]" id="entity_id_from" value="" class="input-text no-changes"></div>
+	                                            	<div class="range-line"><span class="label">To:</span><input type="text" name="entity_id[to]" id="entity_id_to" value="" class="input-text no-changes"></div>
+	                                        	</div>
+	                                        </th>
+	                                        <th>
+	                                        	<div class="name">
+	                                        		<input type="text" name="tag" id="tag" value="" class="input-text no-changes">
+	                                        	</div>
+	                                        </th>
+											<th>
+	                                        	<div class="entity_id">
+	                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="entity_id[from]" id="entity_id_from" value="" class="input-text no-changes"></div>
+	                                            	<div class="range-line"><span class="label">To:</span><input type="text" name="entity_id[to]" id="entity_id_to" value="" class="input-text no-changes"></div>
+	                                        	</div>
+	                                        </th>
+	                                        <th>
+	                                        	<div class="name">
+	                                        		<input type="text" name="tag" id="tag" value="" class="input-text no-changes">
+	                                        	</div>
+	                                        </th>
+	                                        <th>
+	                                        	<div class="info">
+	                                        		<a href="#"></a>
+	                                        	</div>
+	                                        </th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php if($schedule): ?>
+											<?php foreach($schedule as $value): ?>
+												<tr class="data">
+													<td><?php echo $value['o_id']; ?></td>
+													<td><?php echo $value['name']; ?></td>
+													<td><?php echo date("Y-m-d H:i:s",$value['time']); ?></td>
+													<td><?php echo $value['docter']; ?></td>
+													<td><?php echo $value['is_active']; ?></td>
+												</tr>
+											<?php endforeach; ?>
+										<?php else: ?>
+											<tr class="even">
+							               		<td class="empty-text a-center" colspan="8">No records found.</td>
+							            	</tr>
+										<?php endif; ?>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="right">
+							<div class="min-title">新的预约</div>
+							<div class="today data-table">
+								<table cellspacing="0" class="data" id="notes">
+									<colgroup>
+										<col width="100px">
+										<col width="">
+										<col width="160px">
+										<col width="">
+										<col width="50px">
+									</colgroup>
+									<thead>
+										<tr class="headings">
+											<th>
+	                                        	<a href="#" name="entity_id" title="降序" class="sort-arrow-desc">
+	                                        		<span class="entity_id">ID</span>
+	                                        	</a>
+	                                        </th>
+	                                        <th>
+	                                        	<a href="#" name="name" title="asc" class="not-sort">
+	                                        		<span class="name">病人名</span>
+	                                        	</a>
+	                                        </th>
+	                                        <th>
+	                                        	<a href="#" name="type" title="asc" class="not-sort">
+	                                        		<span class="type">预约时间</span>
+	                                        	</a>
+	                                        </th>
+	                                        <th>
+	                                        	<a href="#" name="type" title="asc" class="not-sort">
+	                                        		<span class="type">预约医生</span>
+	                                        	</a>
+	                                        </th>
+	                                        <th>
+	                                        	<a href="#" name="docter" title="asc" class="not-sort">
+	                                        		<span class="docter">状态</span>
+	                                        	</a>
+	                                        </th>
+										</tr>
+										<tr class="filter">
+											<th>
+	                                        	<div class="entity_id">
+	                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="entity_id[from]" id="entity_id_from" value="" class="input-text no-changes"></div>
+	                                            	<div class="range-line"><span class="label">To:</span><input type="text" name="entity_id[to]" id="entity_id_to" value="" class="input-text no-changes"></div>
+	                                        	</div>
+	                                        </th>
+	                                        <th>
+	                                        	<div class="name">
+	                                        		<input type="text" name="tag" id="tag" value="" class="input-text no-changes">
+	                                        	</div>
+	                                        </th>
+											<th>
+	                                        	<div class="entity_id">
+	                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="entity_id[from]" id="entity_id_from" value="" class="input-text no-changes"></div>
+	                                            	<div class="range-line"><span class="label">To:</span><input type="text" name="entity_id[to]" id="entity_id_to" value="" class="input-text no-changes"></div>
+	                                        	</div>
+	                                        </th>
+	                                        <th>
+	                                        	<div class="name">
+	                                        		<input type="text" name="tag" id="tag" value="" class="input-text no-changes">
+	                                        	</div>
+	                                        </th>
+	                                        <th>
+	                                        	<div class="info">
+	                                        		<a href="#"></a>
+	                                        	</div>
+	                                        </th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php if($newSchedule): ?>
+											<?php foreach($newSchedule as $value): ?>
+												<tr class="data">
+													<td><?php echo $value['o_id']; ?></td>
+													<td><?php echo $value['name']; ?></td>
+													<td><?php echo date("Y-m-d H:i:s",$value['time']); ?></td>
+													<td><?php echo $value['docter']; ?></td>
+													<td><?php echo $value['is_active']; ?></td>
+												</tr>
+											<?php endforeach; ?>
+										<?php else: ?>
+											<tr class="even">
+							               		<td class="empty-text a-center" colspan="8">No records found.</td>
+							            	</tr>
+										<?php endif; ?>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="footer">

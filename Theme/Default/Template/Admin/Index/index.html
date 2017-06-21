@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="{$Think.config.SKIN}Admin/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="{$Think.config.SKIN}Admin/css/admin.css">
 	<script type="text/javascript" src="{$Think.config.LIB}jquery.3.1.js"></script>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 	<div id="index">
@@ -15,7 +16,7 @@
 					<ul>
 						<li class="msg"></li>
 						<li class="header">后台管理系统登录</li>
-						<li class="username"><input type="text" name="username" value="" placeholder="用户名"></li>
+						<li class="username"><input type="text" name="username" class="" value="" placeholder="用户名"></li>
 						<li class="password"><input type="password" name="password" value="" placeholder="密码"></li>
 						<li class="verify">
 							<input type="text" name="verify" value="" placeholder="验证码">
@@ -34,14 +35,14 @@
 								//Validate.login(".login-post");
 							</script>
 						</li>
-						<li class="tools clear">
+						<!--<li class="tools clear">
 							<div class="rememberme">
 								<input type="checkbox" name="remember" value=""><span>记住登录</span>
 							</div>
 							<div class="forget">
 								<a href="">忘记密码</a>
 							</div>
-						</li>
+						</li>-->
 						<li class="login"><button><span>登录</span></button></li>
 					</ul>
 				</form>

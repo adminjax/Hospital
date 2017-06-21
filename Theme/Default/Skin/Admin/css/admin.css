@@ -356,13 +356,25 @@ a.back span{
 	font-weight: 600;
 }
 
+/**
+ * index-footer
+ */
+.site-info {
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+/**
+ * footer
+ */
+.footer{
+	border-top: 1px solid;
+	height: 60px;
+}
 
 
 
-
-
-
-
+/* page ******************************************************************/
 /**
  * index page
  */
@@ -415,6 +427,54 @@ a.back span{
 }
 #index .login{
 	margin: 30px 0px;
+}
+#index .verify input{
+	width: 188px;
+}
+#verify_img{
+	vertical-align: middle;
+	border: 1px solid;
+	height: 36px;
+	margin-bottom: 4px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+
+/**
+ * Dashboard index
+ */
+#dashboard .container .middle .top {
+    padding: 20px 0px 0px 0px;
+}
+#dashboard .left{
+	float: left;
+	width: 48%;
+}
+#dashboard .right{
+	float: right;
+	width: 48%;
+}
+#dashboard .content{
+	margin-top: 10px;
+}
+#dashboard .content .min-title{
+	line-height: 25px;
+}
+#dashboard .data-table tr.filter input{
+	width: 60px;
+}
+#dashboard .data-table .label{
+	width: 39px;
+}
+#dashboard .data-table tr.filter .name input{
+	width: 90%;
+}
+#dashboard .data tr{
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	font-size: 15px;
 }
 
 

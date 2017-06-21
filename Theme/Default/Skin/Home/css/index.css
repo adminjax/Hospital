@@ -3,7 +3,6 @@
  */
 html,
 body{
-	height: 100%;
 	background:-webkit-linear-gradient(#A5DAEF, #D8E8EC);/* Safari 5.1 - 6.0 */
 	background:-o-linear-gradient(#A5DAEF, #D8E8EC);/* Opera 11.1 - 12.0 */
 	background:-moz-linear-gradient(#A5DAEF, #D8E8EC);/* Firefox 3.6 - 15 */
@@ -75,7 +74,7 @@ body{
 .middle {
     padding-top: 10px;
     width: 100%;
-    height: 500px;
+    min-height: 409px;
     text-align: center;
 }
 .header{
@@ -149,6 +148,7 @@ a{
     padding: 20px 0px;
     text-align: center;
     border-top: 1px solid #ccc;
+    margin-top: 15px;
 }
 
 
@@ -208,7 +208,7 @@ a{
 	
 }
 #schedule .content li>label{
-	width:35%;
+	width:30%;
 	font-size: 15px;
 	color: #151515;
 	font-weight: 600;
@@ -225,7 +225,7 @@ a{
 	width: 170px;
 }
 .schedule table{
-	width: 60%;
+	width: 70%;
 }
 .schedule table th,
 .schedule table td{
@@ -248,7 +248,6 @@ a{
 }
 .schedule{
 	overflow:auto;
-	height: 300px
 }
 .schedule table{
 	width: 90%;
@@ -284,4 +283,68 @@ a{
 }
 .history .content table td{
 	font-size: 15px;
+}
+.nav-bar .bg{
+	background:-webkit-linear-gradient(#9C9C9C, #E6E6E6);/* Safari 5.1 - 6.0 */
+	background:-o-linear-gradient(#9C9C9C, #E6E6E6);/* Opera 11.1 - 12.0 */
+	background:-moz-linear-gradient(#9C9C9C, #E6E6E6);/* Firefox 3.6 - 15 */
+	background: linear-gradient(#9C9C9C, #E6E6E6);/* 标准的语法 */
+}
+.nav-bar .schedule{
+	overflow: inherit;
+}
+.docter .title{
+	font-size: 20px;
+	font-weight: 600;
+	text-align: left;
+	margin: 0px 0px 0px 10px;
+}
+.docter .content li{
+	border: 1px solid;
+	height: 100px;
+	margin-bottom: 10px;
+}
+.docter .content li .left,
+.docter .content li .right{
+	float: left;
+	height: 100%;
+}
+
+
+
+.docter .content li .left{
+	width: 30%;
+}
+.docter .content li .right{
+	width: 70%;
+	border-left: 1px solid;
+	font-size: 15px;
+}
+.docter .content li .name{
+	text-align: left;
+	padding-left: 10px;
+	font-size: 15px;
+	padding-top: 5px;
+	height: 20px;
+}
+.docter .content li .content{
+	text-align: left;
+	padding: 5px 5px 5px 10px;
+	height: 60px;
+	word-wrap: break-word
+}
+.docter .content li .date{
+	text-align: left;
+	padding-left: 10px;
+	padding-bottom: 5px;
+	height: 20px;
+}
+.docter>.content{
+	width: 96%;
+	margin: auto;
+	margin-top: 10px;
+}
+.docter>.content .left img{
+	width: 100%;
+	height: 100%;
 }

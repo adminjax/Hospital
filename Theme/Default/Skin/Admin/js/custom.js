@@ -2,6 +2,43 @@
  * 
  */
 ;
+var WebInit = {};
+WebInit = {
+	height : 600,
+
+	init : function(){
+		this.setHeight();
+		this.windowResize();
+	},
+
+	setHeight : function(){
+		jQuery(document).ready(function(){
+			var height = jQuery(document).height();
+			if(height > WebInit.height){
+				height = height - 140;
+				jQuery('.middle').css('min-height', height);
+			}else{
+				jQuery('.middle').css('min-height', '660px');
+			}
+		});
+	},
+
+	windowResize : function(){
+		var nowHeight = jQuery(document).height();
+
+		jQuery(window).resize(function() {
+		 	var height = jQuery(document).height();
+
+			if(height > nowHeight){
+				height = height - 100;
+				jQuery('.middle').css('min-height', height);
+				console.log(height);
+			}
+		});
+	}
+}
+
+;
 var switchs = {};
 switchs = {
 	init : function(selector){

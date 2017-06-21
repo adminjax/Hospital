@@ -23,13 +23,13 @@
 						<div class="content">
 							<ul>
 								<?php foreach($data as $value): ?>
-								<li>
+								<li class="clear">
 									<div class="left">
 										<img src="<?php echo $value['avater']; ?>" />
 									</div>
 									<div class="right">
 										<div class="name"><?php echo $value['name']; ?></div>
-										<div class="content"><?php echo html_entity_decode($value['brief']); ?></div>
+										<div class="content"><?php echo mb_substr(htmlspecialchars_decode(htmlspecialchars_decode($value['brief'])), 0, 30).'......'; ?></div>
 										<div class="date"><?php echo $value['name']; ?></div>
 									</div>
 								</li>

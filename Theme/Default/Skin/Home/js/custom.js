@@ -62,3 +62,19 @@ DateTime = {
 	}
 
 }
+
+;
+var Selector = {};
+Selector = {
+    init : function(selector){
+        var url = window.location.href;
+        url = url.toLowerCase();
+
+        jQuery('.nav-bar').find('li').each(function(){
+            var str = jQuery(this).attr('class');
+            if(url.indexOf(str) > 0){
+                jQuery(this).addClass('bg');
+            }
+        });
+    }
+}

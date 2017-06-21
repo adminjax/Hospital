@@ -15,15 +15,24 @@ use Think\Model;
  */
 class LoginModel extends Model
 {
+	//关闭字段信息的自动检测
+	protected $autoCheckFields = false; 
+	
+	//表容器
+	private $table = array(
+			'login' => 'admin_user',
+		);
+
 	/**
 	 * [sigin 登录]
 	 * @param  [string] $name     [用户名]
 	 * @param  [string] $password [密码]
 	 * @return [bool]           [description]
 	 */
-	public function sigin($name, $password){
-		$condition = array('username'=>$name, 'password'=>$password);
-		$data = $this->where($condition)->find();
+	public function login($data){
+		$condition = array('username'=>$data['name'], 'password'=>md5($data['password']));
+		$login = M($this->table['login']);
+		$data = $login->where($condition)->find();
 
 		if($data){
 			session('user.user_id', $data['u_id']);
@@ -50,7 +59,8 @@ class LoginModel extends Model
 	 * @return [string]       [description]
 	 */
 	protected function updateData($uid, $data){
-		$re = $this->where('u_id='.$uid)->save($data);
+		$login = M($this->table['login']);
+		$re = $login->where('u_id='.$uid)->save($data);
 		
 		return $re;
 	}

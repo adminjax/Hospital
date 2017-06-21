@@ -71,7 +71,7 @@ class TagController extends CommonController
         $this->data['tag_name'] = I('post.name', '', 'addslashes');
         $this->data['sort'] = I('post.sort', '', 'addslashes');
         $this->data['is_active'] = I('post.is_active', '', 'int');
-        $this->data['desc'] = htmlentities(I('post.desc'));
+        $this->data['desc'] = htmlspecialchars(I('post.desc'));
 
         $id = I('post.tag_id', '', 'int');
         $tag = D($this->model['tag']);

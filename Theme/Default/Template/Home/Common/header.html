@@ -1,6 +1,6 @@
 <div class="header clear">
 	<div class="left">
-		<span class="border"><img class="avater" src="{$Think.config.SITE_URL}Public/Images/Avater/20170613/593f50f7380a3.jpg" /></span>
+		<span class="border"><img class="avater" src="{:getAvater()}" /></span>
 	</div>
 	<div class="right">
 		<div>
@@ -11,9 +11,12 @@
 </div>
 <div class="nav-bar">
 	<ul class="clear">
-		<li><a href="{:U('Dashboard/index')}"><span>首页</span></a></li>
-		<li><a href="{:U('Schedule/index')}"><span>预约中心</span></a></li>
-		<li><a href="{:U('History/index')}"><span>历史信息</span></a></li>
-		<li><a href="{:U('Account/index')}"><span>个人中心</span></a></li>
+		<li class="dashboard"><a href="{:U('Dashboard/index')}"><span>首页</span></a></li>
+		<li class="schedule"><a href="{:U('Schedule/index')}"><span>预约中心</span></a></li>
+		<li class="history"><a href="{:U('History/index')}"><span>历史信息</span></a></li>
+		<li class="account"><a href="{:U('Account/index')}"><span>个人中心</span></a></li>
 	</ul>
+	<script type="text/javascript">
+		Selector.init();
+	</script>
 </div>
