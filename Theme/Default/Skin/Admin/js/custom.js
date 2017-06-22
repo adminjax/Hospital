@@ -12,8 +12,8 @@ WebInit = {
 	},
 
 	setHeight : function(){
-		jQuery(document).ready(function(){
-			var height = jQuery(document).height();
+		jQuery(window).ready(function(){
+			var height = jQuery(window).height();
 			if(height > WebInit.height){
 				height = height - 140;
 				jQuery('.middle').css('min-height', height);
@@ -24,15 +24,12 @@ WebInit = {
 	},
 
 	windowResize : function(){
-		var nowHeight = jQuery(document).height();
-
 		jQuery(window).resize(function() {
-		 	var height = jQuery(document).height();
+		 	var height = jQuery(window).height();
 
-			if(height > nowHeight){
-				height = height - 100;
+			if(height > WebInit.height){
+				height = height - 140;
 				jQuery('.middle').css('min-height', height);
-				console.log(height);
 			}
 		});
 	}

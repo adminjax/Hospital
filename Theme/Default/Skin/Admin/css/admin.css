@@ -1,9 +1,9 @@
 /* common ***************************************************************************/
 /**
- * 字体
+ * å­—ä½“
  */
 *{
-	font-family:微软雅黑,"Microsoft Yahei",arial;
+	font-family:å¾®è½¯é›…é»‘,"Microsoft Yahei",arial;
 }
 
 /***********************************************************************************/
@@ -134,7 +134,7 @@
 
 
 /**
- * 页面标题
+ * é¡µé¢æ ‡é¢˜
  */
 .container .middle .top{
 	padding: 20px 30px 0px 30px;
@@ -164,23 +164,23 @@
 }
 
 /**
- * 内容宽度
+ * å†…å®¹å®½åº¦
  */
 .container .middle{
 	padding: 0px 30px;
 }
 /**
- * footer宽度 
+ * footerå®½åº¦ 
  */
 .footer .footer-box{
 	padding: 0px 30px;
 }
 
 
-/*页面结构*******************************************************/
+/*é¡µé¢ç»“æž„*******************************************************/
 
 /**
- * 左右结构
+ * å·¦å³ç»“æž„
  */
 .left-right{
 	margin: 20px 0px;
@@ -364,15 +364,33 @@ a.back span{
     margin-top: 10px;
 }
 
+.container .middle{
+	background: url("../images/footer_bg.gif") 0% 100% repeat-x;
+}
+
 /**
  * footer
  */
 .footer{
-	border-top: 1px solid;
 	height: 60px;
+	background: url("../images/footer_bg.gif") repeat-x #e6e6e6;
 }
-
-
+.container .footer .footer-box .left,
+.container .footer .footer-box .right{
+	width: 50% !important;
+	height: 60px; 
+	float: left;
+}
+.container .footer .footer-box .left p{
+	line-height: 60px;
+	font-size: 15px;
+	text-align: left;
+}
+.container .footer .footer-box .right p{
+	line-height: 30px;
+	font-size: 15px;
+	text-align: right;
+}
 
 /* page ******************************************************************/
 /**

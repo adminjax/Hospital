@@ -5,7 +5,11 @@
 	<title>控制面板</title>
 
 	<include file="Common/head" />
-
+	<script type="text/javascript">
+		setInterval(function(){
+			window.location.reload()
+		}, 600000); 
+	</script>
 </head>
 <body>
 	<div id="dashboard">
@@ -58,7 +62,7 @@
 	                                        	</a>
 	                                        </th>
 										</tr>
-										<tr class="filter">
+										<!--<tr class="filter">
 											<th>
 	                                        	<div class="entity_id">
 	                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="entity_id[from]" id="entity_id_from" value="" class="input-text no-changes"></div>
@@ -86,7 +90,7 @@
 	                                        		<a href="#"></a>
 	                                        	</div>
 	                                        </th>
-										</tr>
+										</tr>-->
 									</thead>
 									<tbody>
 										<?php if($schedule): ?>
@@ -147,7 +151,7 @@
 	                                        	</a>
 	                                        </th>
 										</tr>
-										<tr class="filter">
+										<!--<tr class="filter">
 											<th>
 	                                        	<div class="entity_id">
 	                                            	<div class="range-line"><span class="label">From:</span> <input type="text" name="entity_id[from]" id="entity_id_from" value="" class="input-text no-changes"></div>
@@ -176,6 +180,7 @@
 	                                        	</div>
 	                                        </th>
 										</tr>
+										-->
 									</thead>
 									<tbody>
 										<?php if($newSchedule): ?>
